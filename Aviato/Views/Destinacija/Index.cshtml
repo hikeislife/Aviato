@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Aviato.Models.Destinacija>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Destinacije</h3>
+
+<p>
+    @if (User.IsInRole("SuperUser"))
+    {
+        @Html.ActionLink("Kreiraj novu", "Create") <span>| </span>
+    }
+    @Html.ActionLink("Nazad na listu letova", "Index", "Let")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jezici.Jezici)
+        </th>
+        <th>
+            Trajanje leta
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jezici.Jezici)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrajanjeLeta)
+        </td>
+        <td>
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Detalji", "Details", new { id = item.DestinacijaId })  <span > |</span>  
+                @Html.ActionLink("Letovi", "LetoviPoDestinaciji", new { id = item.DestinacijaId })
+            }
+            else
+            {
+                @Html.ActionLink("Izmeni", "Edit", new { id = item.DestinacijaId })  <span> |</span>
+                @Html.ActionLink("Detalji", "Details", new { id = item.DestinacijaId })  <span> |</span>
+                @Html.ActionLink("Letovi", "LetoviPoDestinaciji", new { id = item.DestinacijaId })
+            }
+
+        </td>
+    </tr>
+}
+
+</table>

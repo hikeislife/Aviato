@@ -1,0 +1,51 @@
+﻿@model Aviato.Models.Avion
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Obriši avion</h3>
+
+<h4>Da li ste sigurni??</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip.NazivTipa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tip.NazivTipa)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.SifraAviona)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SifraAviona)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.GodinaProizvodnje)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GodinaProizvodnje)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.ServisniStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ServisniStatus)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Obriši" class="btn btn-default" /> |
+            @Html.ActionLink("Nazad na listu", "Index")
+        </div>
+    }
+</div>

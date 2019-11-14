@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Aviato.Models.Tip>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tipovi aviona</h2>
+
+<p>
+    @Html.ActionLink("Unesi novi", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NazivTipa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NazivTipa)
+        </td>
+        <td>
+            @Html.ActionLink("izmeni", "Edit", new { id=item.TipId }) |
+            @Html.ActionLink("Detalji", "Details", new { id=item.TipId })
+        </td>
+    </tr>
+}
+
+</table>

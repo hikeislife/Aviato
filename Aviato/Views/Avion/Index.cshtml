@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Aviato.Models.Avion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Avion</h2>
+
+<p>
+    @if (Roles.IsUserInRole("SuperUser"))
+    {
+        @Html.ActionLink("Unesi novi", "Create")
+    }
+</p>
+<table class="table mb-5" style="border-bottom: 1px solid ivory;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SifraAviona)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GodinaProizvodnje)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServisniStatus)
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SifraAviona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GodinaProizvodnje)
+        </td>
+        <td style="border-right: 1px solid ivory">
+            @if (item.ServisniStatus)
+            {
+                <span style="color: orange;">Prizemljen</span>
+            }
+            else
+            {
+                <span style="color: lightgreen;">Aktivan</span>
+            }
+        </td>
+        <td class="px-0">
+            @if (Roles.IsUserInRole("SuperUser"))
+            {
+            <span class="ml-4">@Html.ActionLink("Detalji", "Details", new { id = item.AvionId })</span>
+
+            }
+
+            @if (!Roles.IsUserInRole("SuperUser"))
+            {
+                if (item.ServisniStatus == false)
+                {
+                    <span class="ml-4">@Html.ActionLink("Pošalji na servis", "ServisAviona", "Home", new { id = item.AvionId }, new { @style = "color: lightgreen;" })</span>
+                }
+                else
+                {
+                    <span class="ml-4" style="color: orange;">Na servisu</span>
+                }
+
+            }
+
+
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,39 @@
+﻿@model Aviato.Models.Destinacija
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2></h2>
+
+<div>
+    <h3>Detalji destinacije</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Jezici.Jezici) -
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Jezici.Jezici)
+        </dd>
+        <br />  
+        <dt>
+            @Html.DisplayNameFor(model => model.Naziv) - 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Naziv)
+        </dd>
+        <br />
+        <dt>
+            Trajanje leta - 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TrajanjeLeta)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Izmeni", "Edit", new { id = Model.DestinacijaId }) |
+    @Html.ActionLink("Nazad na listu destinacija", "Index")
+</p>

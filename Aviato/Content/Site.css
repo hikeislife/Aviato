@@ -1,0 +1,158 @@
+﻿/*#81B8C8*/
+/*GENERALS*/
+body {
+    padding-bottom: 20px;
+    color: #47D8EE !important;
+    font-weight: 500;
+}
+
+a, .dobrodosli-span {
+    font-weight: normal;
+}
+
+a {
+    color: #51a9ff;
+}
+
+.pocetna-link ul {
+    padding: 0 0 0 15px;
+}
+
+.pocetna-link li a {
+    display: block;
+    border: 1px solid ivory;
+    border-radius: 3px;
+    width: 230px;
+    margin: 14px auto;
+    font-size: 18px;
+    text-align: center;
+    padding: 3px;
+    background: #2EA2AB;
+    color: #1B3039;
+    position: initial;
+    transition: all .2s ease-in;
+}
+
+.pocetna-link li a:hover {
+    background: #166C72;
+    color: ivory;
+}
+
+.promenite-pass-txt {
+    display: block;
+    text-align: center;
+    font-size: 15px;
+}
+
+.dobrodosli-span {
+    font-size: 25px;
+}
+
+.dobrodosli-txt {
+    font-size: 20px;
+}
+ 
+h2, h3, h4 {
+    font-weight: 300;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt, .dl-horizontal dl {
+    white-space: normal;
+    /*width: 150px;*/
+}
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 280px;*/
+    text-align: center !important;
+    background: #1b3039 !important;
+    color: white !important;
+    border-style: none;
+    border: 1px solid #2D5A69 !important;
+}
+
+input {
+    background: #1b3039 !important;
+    color: white !important;
+}
+
+input:focus, input:hover, select:focus, select:hover {
+    box-shadow: 0 0 2px 2px #2D5A69 !important;
+    background: #283D46 !important;
+}
+
+hr {
+    background: ivory;
+}
+
+dd, dt {
+    /*width: 100px !important;*/
+    display: inline-block;
+}
+
+dd {
+    padding-left: 15px;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+/* ikona aviato */
+.fa-aviato {
+    font-size: 45px;
+    position: relative;
+    bottom: -13px;
+}
+
+/* ServisAviona */
+.label-avion-servis {
+    margin-top: 7px;
+}
+
+.check-servis {
+    margin-left: 7px;
+}
+
+.check-servis-span {
+    position: relative;
+    bottom: -2px;
+}
+
+.servis-submit {
+    margin-left: 120px;
+    margin-top: 25px;
+}
+
+#Pilot_OcenaZS { /*check box zs zaposleni edit*/
+    width: 18px;
+    display: inline;
+    position: relative;
+    bottom: -12px;
+}
+
+.dl-zaposleni-detalji hr {
+    margin-bottom: 10px !important;
+    margin-top: 7px;
+}
+
+.servis-posalji-link:hover {
+    color: green;
+}
+
+
+
+

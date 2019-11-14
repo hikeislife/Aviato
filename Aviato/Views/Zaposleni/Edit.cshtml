@@ -1,0 +1,171 @@
+﻿<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+@model Aviato.ViewModels.EditZaposleniViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Izmena</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Izmena podataka zaposlenog</h4>
+    <hr />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Zaposleni.ZaposleniId)
+    @Html.HiddenFor(model => model.Zaposleni.IdentityId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Zaposleni.JMBG, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Zaposleni.JMBG, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Zaposleni.JMBG, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Zaposleni.Ime, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Zaposleni.Ime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Zaposleni.Ime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Zaposleni.Prezime, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Zaposleni.Prezime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Zaposleni.Prezime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Zaposleni.GodinaRodjenja, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Zaposleni.GodinaRodjenja, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Zaposleni.GodinaRodjenja, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @if (ViewBag.Pozicija == "Pilot")
+    {
+        @Html.HiddenFor(model => model.Pilot.PilotId)
+
+        <div class="form-group mb-0">
+            @Html.LabelFor(model => model.Pilot.PoslednjiMedicinski, htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Pilot.PoslednjiMedicinski, new { htmlAttributes = new { @class = "form-control datum date datetimepicker3", @id = "datetimepicker3" } })
+                @Html.ValidationMessageFor(model => model.Pilot.PoslednjiMedicinski, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="polje"></div>
+        <div class="form-group">
+            <span class="zs pl-3" style="color: crimson;"></span>
+            @Html.LabelFor(model => model.Pilot.OcenaZS, htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Pilot.OcenaZS, new { htmlAttributes = new { @class = "form-control zsInput input-group" } })
+                @Html.ValidationMessageFor(model => model.Pilot.OcenaZS, "", new { @class = "text-danger" })
+                <span style="color: lightgreen;"> Sposoban</span>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pilot.SatiLetenja, htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Pilot.SatiLetenja, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Pilot.SatiLetenja, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+    }
+    else if (ViewBag.Pozicija == "Stjuard")
+    {
+        <div class="ovdedodaj">
+            @foreach (var stju in Model.Stjuard)
+            {
+                <div class="form-group target">
+                    @Html.LabelFor(model => stju.JezikId, "Jezik", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => stju.Jezik.Jezici, new SelectList(ViewBag.JezikId, "Value", "Text"), stju.Jezik.Jezici, new { @class = "form-control izabraniJezik polje", @style = "display: inline-block" })
+                        @Html.ValidationMessageFor(model => stju.Jezik.Jezici, "", new { @class = "text-danger", @style = "padding-right: 20px" })
+                        <span class="fas fa-minus-circle"></span><span class="fas fa-plus-circle"></span>
+                    </div>
+                </div>
+            }
+            <input type="hidden" name="promenaJezika" id="pass" value="" />
+            <script src="~/Scripts/plus.js"></script>
+        </div>
+    }
+    else if (ViewBag.Pozicija == "Mehaničar")
+    {
+        <div class="ovdedodaj">
+            @foreach (var meh in Model.Mehanicar)
+            {
+                <div class="target">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => meh.Licenca, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(model => meh.Tip.NazivTipa, new SelectList(ViewBag.Licenca, "Value", "Text"), meh.Tip.NazivTipa, new { @class = "form-control izabranaLicenca polje", @style = "display: inline-block" })
+                            @Html.ValidationMessageFor(model => meh.Tip.NazivTipa, "", new { @class = "text-danger", @style = "padding-right: 20px" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => meh.DatumLicence, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => meh.DatumLicence, new { htmlAttributes = new { @class = "form-control izabraniDatum datum date datetimepicker3", @id = "datetimepicker3" } })
+                            @Html.ValidationMessageFor(model => meh.DatumLicence, "", new { @class = "text-danger" })
+                            <span class="fas fa-minus-circle"></span><span class="fas fa-plus-circle"></span>
+                        </div>
+                        <script src="~/Scripts/plus.js"></script>
+                    </div>
+                </div>
+            }
+            <input type="hidden" name="promenaLicenci" id="TipoviZaUnos" value="" />
+            <input type="hidden" name="promenaDatuma" id="DatumiZaUnos" value="" />
+
+        </div>
+    }
+
+    <input type="hidden" value="@ViewBag.JezikId" name="jezik" />
+    <input type="hidden" value="@ViewBag.Licenca" name="licenca" />
+    <input type="hidden" value="@ViewBag.Pozicija" name="pozicija" />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+
+            <input type="submit" value="Izmeni" class="okidac btn btn-default" />
+        </div>
+        @*<div class="okidac">OKIDAČ</div>*@
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Nazad na listu zaposlenih", "Index")
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+    function insertCalendar() {
+        $('.datetimepicker3').datetimepicker({
+            format: 'M/DD/YYYY'
+        });
+    }
+    insertCalendar()
+</script>
+<script src="~/Scripts/okidac.js"></script>
+<script src="~/Scripts/zsValidacija.js"></script>

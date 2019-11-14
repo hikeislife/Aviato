@@ -1,0 +1,67 @@
+﻿@model Aviato.Models.Let
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2></h2>
+
+<div>
+    <h3>Detalji leta</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Destinacija1.Naziv)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Destinacija1.Naziv)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.VremePoletanja)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VremePoletanja)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.Avion1.SifraAviona)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Avion1.SifraAviona)
+        </dd>
+        <br />
+        <dt>
+            Pilot 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zaposleni1.Ime) @Html.DisplayFor(model => model.Zaposleni1.Prezime)
+        </dd>
+        <br />
+        <dt>
+            Kopilot 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zaposleni.Ime) @Html.DisplayFor(model => model.Zaposleni.Prezime)
+        </dd>
+        <br />
+        <dt>
+            Stjuard 1 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zaposleni2.Ime) @Html.DisplayFor(model => model.Zaposleni2.Prezime)
+        </dd>
+        <br />
+        <dt>
+            Stjuard 2 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zaposleni3.Ime) @Html.DisplayFor(model => model.Zaposleni3.Prezime)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Nazad na listu letova", "Index") |
+    @Html.ActionLink("Izmeni", "Edit", new { id = Model.LetId }) |
+    @Html.ActionLink("Obriši", "Delete", new { id = Model.LetId })
+</p>

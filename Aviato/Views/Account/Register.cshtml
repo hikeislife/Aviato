@@ -1,0 +1,82 @@
+﻿@model Aviato.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Registracija";
+}
+<h3>Unos novog zaposlenog</h3>
+<hr />
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal ml-5 pl-4", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Zaposleni.Ime, new { @class = "col-md-4 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Zaposleni.Ime, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Zaposleni.Prezime, new { @class = "col-md-4 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Zaposleni.Prezime, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Zaposleni.JMBG, new { @class = "col-md-4 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Zaposleni.JMBG, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Zaposleni.GodinaRodjenja, new { @class = "col-md-4 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Zaposleni.GodinaRodjenja, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, "Potvrdi password", new { @class = "col-md-4 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoleName, new { @class = "col-md-4 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.RoleName, new SelectList(ViewBag.Roles, "Value", "Text"), "Izaberi rolu", new { @class = "form-control", @onchange = "SpecZaposlenog(this.value)" })
+        </div>
+    </div>
+
+    <div class="spec-rola-izbor">
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default okidac" value="Unesi" style="width: 90px;" />
+        </div>
+    </div>
+    @Html.ActionLink("Nazad na listu zaposlenih", "Index", "Zaposleni")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/main.js"></script>
+<script src="~/Scripts/mehanicar.js"></script>
+<script src="~/Scripts/stjuard.js"></script>
+<script src="~/Scripts/zsValidacija.js"></script>

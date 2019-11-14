@@ -1,0 +1,32 @@
+﻿@model Aviato.ViewModels.RoleViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3 style="color: red;">Obriši</h3>
+
+<h4>Da li ste sigurni??</h4>
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Naziv role - 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" style="background: red !important;"/> |
+            @Html.ActionLink("Nazad na listu rola", "Index")
+        </div>
+    }
+</div>

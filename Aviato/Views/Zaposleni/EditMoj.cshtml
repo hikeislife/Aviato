@@ -1,0 +1,146 @@
+﻿@model Aviato.ViewModels.EditZaposleniViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h3>Izmeni podatke zaposlenog</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h4>@Html.Raw(ViewBag.Pozicija)</h4>
+    <div class="form-horizontal">
+        <hr />
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Zaposleni.ZaposleniId)
+        @Html.HiddenFor(model => model.Zaposleni.IdentityId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Zaposleni.Ime, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Zaposleni.Ime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Zaposleni.Ime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Zaposleni.Prezime, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Zaposleni.Prezime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Zaposleni.Prezime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Zaposleni.GodinaRodjenja, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Zaposleni.GodinaRodjenja, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Zaposleni.GodinaRodjenja, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Zaposleni.JMBG, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Zaposleni.JMBG, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Zaposleni.JMBG, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (ViewBag.Pozicija == "Pilot")
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Pilot.PilotId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Pilot.PoslednjiMedicinski, "Poslednji medicinski", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Pilot.PoslednjiMedicinski, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Pilot.PoslednjiMedicinski, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Pilot.OcenaZS, "Ocena ZS", htmlAttributes: new { @class = "control-label col-md-4" })
+
+                <span>@Html.EditorFor(model => model.Pilot.OcenaZS, new { htmlAttributes = new { @class = "form-control" } })</span>
+                @*@Html.ValidationMessageFor(model => model.Pilot.OcenaZS, "", new { @class = "text-danger" })*@
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Pilot.SatiLetenja, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Pilot.SatiLetenja, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Pilot.SatiLetenja, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else if (ViewBag.Pozicija == "Mehaničar")
+        {
+            <input id="promenaLicenci" type="hidden" name="promenaLicenci" value="" />
+            <input id="promenaDatuma" type="hidden" name="promenaDatuma" value="" />
+            <p class="licencaPoruka text-danger">Već postoji ova licenca</p>
+            foreach (var meh in Model.Mehanicar)
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => meh.Licenca, new { @class = "meh_Licenca" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => meh.Tip, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => meh.Tip.NazivTipa, new SelectList(ViewBag.Licenca, "Value", "Text"), meh.Tip.NazivTipa, new { @class = $"form-control meh_Tip_NazivTipa", @style = "display: inline-block", onchange = "uzmiLicencuOnChange(this.value, event)" })
+                        @Html.ValidationMessageFor(model => meh.Tip.NazivTipa, "", new { @class = "text-danger", @style = "padding-right: 20px" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => meh.DatumLicence, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => meh.DatumLicence, new { htmlAttributes = new { @class = "form-control meh_DatumLicence" } })
+                        @Html.ValidationMessageFor(model => meh.DatumLicence, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+        }
+        else if (ViewBag.Pozicija == "Stjuard")
+        {
+            var redniBrojJezika = 0;
+
+            <input id="promenaJezika" type="hidden" name="promenaJezika" value="" />
+            <p class="jezikPoruka text-danger">Već postoji ovaj jezik</p>
+            foreach (var stju in Model.Stjuard)
+            {
+                redniBrojJezika++;
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => stju.JezikId, new { @class = "stju_Stjuard" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => stju.Jezik.Jezici, $"Jezik{redniBrojJezika}", htmlAttributes: new { @class = "control-label col-md-4" })
+
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => stju.Jezik.Jezici, new SelectList(ViewBag.JezikId, "Value", "Text"), stju.Jezik.Jezici, new { @class = "form-control stju_Jezik_Jezici", @style = "display: inline-block", @onchange = "uzmiJezikOnChange(this.value, event)" })
+                        @Html.ValidationMessageFor(model => stju.Jezik.Jezici, "", new { @class = "text-danger", @style = "padding-right: 20px" })
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Izmeni" class="btn btn-default submitClick" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Nazad na detalje", "Details", new { id = Model.Zaposleni.ZaposleniId }) |
+    @Html.ActionLink("Nazad na listu zaposlenih", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/Edit.js"></script>

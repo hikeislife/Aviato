@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Aviato.Models.Let>
+
+@{
+    ViewBag.Title = "LetoviBezDelaPosade";
+}
+
+<h2>Letovi bez dela posade</h2>
+
+<p>
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Postavi novi let", "Create") <span>|  </span>
+    }
+    @Html.ActionLink("Aktuelni letovi", "index") |
+    @Html.ActionLink("Prošli letovi", "Prosliletovi") |
+    @Html.ActionLink("Nepotpuna posada", "LetoviBezDelaPosade") |
+    @Html.ActionLink("Po destinaciji", "Index", "Destinacija")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Destinacija1.Naziv) 
+        </th>
+        <th>
+            Avion 
+        </th>
+        <th>
+            Vreme poletanja
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destinacija1.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VremePoletanja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Avion1.SifraAviona)
+            </td>
+            
+            <td>
+                @Html.ActionLink("Izmene", "Edit", new { id = item.LetId }) |
+                @Html.ActionLink("Detalji", "Details", new { id = item.LetId }) |
+                @Html.ActionLink("Obriši", "Delete", new { id = item.LetId })
+            </td>
+        </tr>
+    }
+
+</table>

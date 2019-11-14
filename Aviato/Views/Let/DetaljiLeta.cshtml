@@ -1,0 +1,67 @@
+﻿@model Aviato.Models.Let
+@{
+    ViewBag.Title = "Aviato";
+}
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div style="display: grid; grid-template-columns: 1fr 1fr;">
+            <dt>
+                Vreme Poletanja:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.VremePoletanja)
+            </dd>
+            <dt>
+                Destinacija:
+            </dt>
+            <dd id="destinacija">
+                @Html.DisplayFor(model => model.Destinacija1.Naziv)
+            </dd>
+            <dt>
+                Avion:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Avion1.SifraAviona)
+            </dd>
+            <dt>
+                Pilot:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Zaposleni.Ime) @Html.DisplayFor(model => model.Zaposleni.Prezime)
+            </dd>
+            <dt>
+                Kopilot:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Zaposleni1.Ime) @Html.DisplayFor(model => model.Zaposleni1.Prezime)
+            </dd>
+            <dt>
+                Prvi stjuard:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Zaposleni2.Ime) @Html.DisplayFor(model => model.Zaposleni2.Prezime)
+            </dd>
+            <dt>
+                Drugi stjuard:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Zaposleni3.Ime) @Html.DisplayFor(model => model.Zaposleni3.Prezime)
+            </dd>
+            <dt class="ml-2 w-50"><hr class="mb-0" /></dt>
+            <dd>
+            </dd>
+        </div>
+    </dl>
+
+</div>
+<span class="vremenska-click position-relative"><p style="font-size: 18px;">Vremenska prognoza za @Html.DisplayFor(model => model.Destinacija1.Naziv)</p></span>
+<div class="vremenska-ispis"></div>
+
+@{
+    var dest = @ViewBag.Destinacija;
+}
+
+<input id="destinacijaSaControlla" type="hidden" name="name" value="@dest" />
+@*<script src="~/Scripts/VremenskaPrognoza.js"></script>*@
+<script src="~/Scripts/jquery-3.3.1.js"></script>

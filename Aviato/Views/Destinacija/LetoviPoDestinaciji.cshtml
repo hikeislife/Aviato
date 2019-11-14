@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Aviato.Models.Let>
+
+@{
+    ViewBag.Title = "LetoviPoDestinaciji";
+}
+
+<h2 class="mb-3 pt-3">Letovi po destinaciji</h2>
+<div class="mb-2">
+    @Html.ActionLink("Nazad na listu destinacija", "Index") |
+    @Html.ActionLink("Nazad na listu letova", "Index", "Let")
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Destinacija1.Naziv)
+        </th>
+        <th>
+            Vreme poletanja
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avion1.SifraAviona)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.VremePoletanja < DateTime.Now)
+                {
+                    <span style="color: orange;">@Html.DisplayFor(modelItem => item.Destinacija1.Naziv)</span>
+                }
+                else
+                {
+                    <span style="color: lightgreen;">@Html.DisplayFor(modelItem => item.Destinacija1.Naziv)</span>
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VremePoletanja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Avion1.SifraAviona)
+            </td>
+        </tr>
+    }
+
+</table>
+

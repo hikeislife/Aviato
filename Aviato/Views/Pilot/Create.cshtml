@@ -1,0 +1,51 @@
+﻿@model Aviato.Models.RegisterViewModel
+
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group mt-4">
+    @Html.LabelFor(model => model.Pilot.PoslednjiMedicinski, htmlAttributes: new { @class = "control-label col-md-6" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Pilot.PoslednjiMedicinski, new { htmlAttributes = new { @class = "form-control datum datetimepicker3" } })
+        @Html.ValidationMessageFor(model => model.Pilot.PoslednjiMedicinski, "", new { @class = "text-danger" })
+    </div>
+    <span class="zs pl-3" style="color: crimson;"></span>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Pilot.OcenaZS, htmlAttributes: new { @class = "control-label col-md-6" })
+    <div class="col-md-10 mb-5 pb-2">
+        <div class="checkbox">
+            @Html.EditorFor(model => model.Pilot.OcenaZS, new { htmlAttributes = new { @class = "zsInput" } }) <span class="position-relative ocenaZS-label" style="color: lightgreen;">Sposoban</span>
+            @Html.ValidationMessageFor(model => model.Pilot.OcenaZS, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+<div class="form-group mb-5">
+    @Html.LabelFor(model => model.Pilot.SatiLetenja, htmlAttributes: new { @class = "control-label col-md-6" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Pilot.SatiLetenja, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Pilot.SatiLetenja, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+    function insertCalendar() {
+        $('.datetimepicker3').datetimepicker({
+            format: 'M/DD/YYYY'
+        });
+    }
+    insertCalendar()
+</script>
+<script src="~/Scripts/zsValidacija.js"></script>

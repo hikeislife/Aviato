@@ -1,0 +1,48 @@
+﻿@model Aviato.Models.Avion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2></h2>
+
+<div>
+    <h3>Detalji aviona</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip.NazivTipa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tip.NazivTipa)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.SifraAviona)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SifraAviona)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.GodinaProizvodnje)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GodinaProizvodnje)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.ServisniStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ServisniStatus) <span style="color: orange;">Na servisu</span>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Izmeni", "Edit", new { id = Model.AvionId }) |
+    @Html.ActionLink("Nazad na listu aviona", "Index")
+</p>
+
+
+

@@ -1,0 +1,44 @@
+﻿@model Aviato.Models.Destinacija
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Obriši destinaciju</h3>
+
+<h4>da li ste sigurni??</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Jezici.Jezici) - 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Jezici.Jezici)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Naziv)
+        </dd>
+        <br />
+        <dt>
+            Trajanje leta
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TrajanjeLeta)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Obriši" class="btn btn-default" /> |
+            @Html.ActionLink("Nazad na listu destinacija", "Index")
+        </div>
+    }
+</div>

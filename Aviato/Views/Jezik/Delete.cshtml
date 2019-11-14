@@ -1,0 +1,31 @@
+﻿@model Aviato.Models.Jezik
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Obriši jezik</h3>
+
+<h4>Da li ste sigurni??</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Jezici) -
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jezici)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Obriši" class="btn btn-default" style="width 90px;"/> |
+            @Html.ActionLink("Nazad na listu jezika", "Index")
+        </div>
+    }
+</div>

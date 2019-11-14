@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Aviato.Models.Jezik>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Jezici</h3>
+
+<p>
+    @Html.ActionLink("Kreiraj novi", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Jezici)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jezici)
+        </td>
+        <td>
+            @Html.ActionLink("Izmeni", "Edit", new { id=item.JezikId }) |
+            @Html.ActionLink("Detalji", "Details", new { id=item.JezikId })
+        </td>
+    </tr>
+}
+
+</table>

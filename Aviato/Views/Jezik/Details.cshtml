@@ -1,0 +1,26 @@
+﻿@model Aviato.Models.Jezik
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2></h2>
+
+<div>
+    <h3>Detalji jezika</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Jezici) - 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jezici)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Izmeni", "Edit", new { id = Model.JezikId }) |
+    @Html.ActionLink("Nazad na listu jezika", "Index")
+</p>

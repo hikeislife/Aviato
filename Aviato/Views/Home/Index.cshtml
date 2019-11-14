@@ -1,0 +1,213 @@
+﻿@model Aviato.ViewModels.EditZaposleniViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.print.css" media="print" />
+
+<div class="row">
+    <h4 class="ml-3 mb-4"><span class="dobrodosli-span">@Model.Zaposleni.Ime</span>, <span class="dobrodosli-txt">dobrodošli u</span> <span class="fab fa-aviato"></span></h4>
+    <span class="ml-3">Ulogovani ste kao @ViewBag.Email. Ako to niste vi, molimo</span>
+    <a class="pl-3" href="javascript:document.getElementById('logoutForm').submit()">izlogujte se ovde</a>
+    <div class="col-md-12 pocetna-link position-relative">
+        <hr />
+        @if (ViewBag.Rola == "SuperUser")
+        {
+            <h4>Super user</h4>
+            <h5>@Model.Zaposleni.Ime @Model.Zaposleni.Prezime</h5>
+            <hr />
+            <ul>
+                <li class="mt-5">@Html.ActionLink("Role", "Index", "Role")</li>
+                <li>@Html.ActionLink("Destinacije", "Index", "Destinacija")</li>
+                <li>@Html.ActionLink("Jezici", "Index", "Jezik")</li>
+                <li>@Html.ActionLink("Avioni", "Index", "Avion")</li>
+                <li>@Html.ActionLink("Tipovi aviona", "Index", "Tip")</li>
+                <li>@Html.ActionLink("Zaposleni", "Index", "Zaposleni")</li>
+                <li>@Html.ActionLink("Letovi", "Index", "Let")</li>
+            </ul>
+        }
+        else if (ViewBag.Rola == "Admin")
+        {
+            <h4>Administrator</h4>
+            <h5>@Model.Zaposleni.Ime @Model.Zaposleni.Prezime</h5>
+            <hr />
+
+            <ul>
+                <li>@Html.ActionLink("Letovi", "Index", "Let")</li>
+                <li>@Html.ActionLink("Zaposleni", "Index", "Zaposleni")</li>
+                <li>@Html.ActionLink("Servisni status aviona", "Index", "Avion")</li>
+            </ul>
+        }
+        else if (@ViewBag.Rola == "Pilot")
+        {
+            <h4>Pilot</h4>
+            <h5>@Model.Zaposleni.Ime @Model.Zaposleni.Prezime</h5>
+            <hr />
+
+            if (Model.Pilot.OcenaZS)
+            {
+                <p>Ocena zdravstvenog stanja: <b  style="color: lightgreen;">sposoban</b></p>
+                <p>Sledeći lekarski pregled: @Model.Pilot.PoslednjiMedicinski.AddMonths(6).ToString("dd/MM/yyyy")</p>
+            }
+            else
+            {
+                <p>Ocena zdravstvenog stanja: <b style="color: orange;">prizemljen</b></p>
+                <p>Sledeći lekarski pregled: @Model.Pilot.PoslednjiMedicinski.AddMonths(1).ToString("dd/MM/yyyy")</p>
+            }
+
+            <p>Sati letenja: @Model.Pilot.SatiLetenja</p>
+        }
+
+        @if (ViewBag.Rola == "Stjuard")
+        {
+            <h4>Stjuard</h4>
+            <h5>@Model.Zaposleni.Ime @Model.Zaposleni.Prezime</h5>
+        }
+
+    <dl>
+        @if (ViewBag.Rola == "Stjuard" || ViewBag.Rola == "Pilot")
+        {
+            <div class="kalendarHolder">
+                <div>
+                    <div>Detalji leta:</div>
+                    <div class="detalji">
+                        @Html.Action("DetaljiLeta", "Let")
+                    </div>
+                </div>
+
+                <input type="hidden" name="idLeta" class="idLeta" value="" />
+                <div class="kalendar" id="calendar">
+                </div>
+            </div>
+        }
+
+        else if (ViewBag.Rola == "Mehaničar")
+        {
+            <h4>Mehaničar</h4>
+            <h5>@Model.Zaposleni.Ime @Model.Zaposleni.Prezime</h5>
+            <hr />
+            <div class="d-inline-block servis-modeli pr-5 ml-4">
+                <dt class="mb-3 ml-4">
+                    Licence:
+                </dt>
+
+                @foreach (var it in Model.Mehanicar)
+                {
+
+                    <br />
+                    <dd class="ml-4">
+                        - @Html.DisplayFor(model => it.Tip.NazivTipa)
+                    </dd>
+
+                }
+            </div>
+            @*<hr />*@
+            <div class="d-inline-block position-absolute servis">
+                <dt class="mb-3 ml-3">
+                    Avioni za servis:
+                </dt>
+                @foreach (var av in Model.Avion)
+                {
+                @Html.HiddenFor(model => av.AvionId)
+                <br />
+                <dd class="ml-3">
+                    - @Html.DisplayFor(model => av.SifraAviona)
+                </dd>
+
+                @Html.ActionLink("Servisiraj", "ServisAviona", new { id = av.AvionId }, new { @style = " color: lightgreen;" })
+                }
+             </div>
+        }
+        </dl>
+        @*<hr />*@
+    <span class="promenite-pass-txt pr-1">@Html.ActionLink("Promenite password", "ChangePassword", "Manage")</span>
+    </div>
+</div>
+
+<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
+<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
+<script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
+<script src="~/Scripts/fullcalendar.min.js"></script>
+<script src="~/Scripts/KalendarAjax.js"></script>
+<script>
+    function ispisiKalendar(vremena) {
+        $('#calendar').fullCalendar('destroy'); // uklanja prethodno instanciran kalendar
+        $('#calendar').fullCalendar({
+            defaultDate: new Date(),
+            titleFormat: {
+                year: 'numeric'
+            },
+            header: {
+                left: 'prev,next today, title',
+                right: ''
+            },
+            eventLimit: true,
+            eventColor: '#7195A4',
+            events: vremena
+            //selectable: true,
+            //select: function (start, event, view) {
+            //   console.log(event)
+            //}
+
+        })
+        let danas = document.querySelector('.fc-today-button');
+        danas.innerHTML = "danas";
+        prevodilac();
+        let sl = document.querySelector('.fc-left'),
+            pr = document.querySelector('.fc-left');
+        sl.onclick = () => {
+            prevodilac();
+        }
+        pr.onclick = () => {
+            prevodilac();
+        }
+    }
+
+    function prevodilac() {
+        let levo = document.querySelector('.fc-left');
+
+        let mesecGodina = levo.querySelector('h2');
+
+        let mesec = mesecGodina.innerHTML.split(' ')[0];
+        console.log(mesec)
+        let godina = mesecGodina.innerHTML.split(' ')[1];
+        if (mesec == "May") {
+            mesecGodina.innerHTML = `Maj ${godina}`;
+        }
+        else if (mesec == "June") {
+            mesecGodina.innerHTML = `Jun ${godina}`;
+        }
+        else if (mesec == "July") {
+            mesecGodina.innerHTML = `Jul ${godina}`;
+        }
+        else if (mesec == "August") {
+            mesecGodina.innerHTML = `Avg ${godina}`;
+        }
+        else if (mesec == "September") {
+            mesecGodina.innerHTML = `Sep ${godina}`;
+        }
+        else if (mesec == "October") {
+            mesecGodina.innerHTML = `Okt ${godina}`;
+        }
+        else if (mesec == "November") {
+            mesecGodina.innerHTML = `Nov ${godina}`;
+        }
+        else if (mesec == "December") {
+            mesecGodina.innerHTML = `Dec ${godina}`;
+        }
+        else if (mesec == "January") {
+            mesecGodina.innerHTML = `Jan ${godina}`;
+        }
+        else if (mesec == "February") {
+            mesecGodina.innerHTML = `Feb ${godina}`;
+        }
+        else if (mesec == "March") {
+            mesecGodina.innerHTML = `Mar ${godina}`;
+        }
+        else if (mesec == "April") {
+            mesecGodina.innerHTML = `Apr ${godina}`;
+        }
+    }
+</script>

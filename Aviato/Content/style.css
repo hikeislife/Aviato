@@ -1,0 +1,163 @@
+input {
+    outline: none;
+}
+
+footer {
+    color: ivory;
+}
+
+.h-100-cust {
+    min-height: 100vh !important;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: unset !important;
+}
+
+table * {
+    color: #81b8c8;
+}
+
+.btn-default {
+    background: #2EA2AB !important;
+}
+
+#calendar {
+    width: 95%;
+    margin-top: 22px !important;
+    margin-left: 16px !important;
+    height: 300px !important;
+}
+
+.kalendarHolder {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.fc-today, .fc-state-highlight {
+    color: black !important;
+}
+
+.fc-event {
+    border-radius: 0 !important;
+    box-shadow: inset 0 0 1px 3px #c2a437 !important;
+    height: 30px !important;
+    top: -29px !important;
+    color: black !important;
+    background: transparent !important;
+}
+
+.fc-event:hover {
+    cursor: pointer;
+}
+
+.fc-day-grid-event {
+    margin: 0 !important;
+}
+
+.fc-day-number {
+    text-align: center !important;
+}
+
+.fc {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.fc-title {
+    color: transparent !important;
+}
+
+.fc-button {
+    width: 27px;
+    height: 20px;
+}
+
+.fc button .fc-icon {
+    left: -10px;
+}
+
+.fc-today-button {
+    width: 60px;
+    font-size: 14px;
+}
+
+.fc-today-button:hover {
+    background: ivory;
+}
+
+.fc-left h2 {
+    padding: 3px 0 0 5px;
+    font-size: 19px;
+    display: inline-block;
+}
+
+/*create-mehanicar*/
+#Mehanicar_Licenca, #Mehanicar_DatumLicence {
+    width: 190px;
+}
+
+#Stjuard_JezikId {
+    width: 320px;
+}
+
+.cl-mehanicar {
+    margin-left: 110px !important;
+    width: 150px !important;
+}
+
+.ukloniDugme, .ukloniDugmeJezik {
+    color: orange !important;
+}
+
+.ukloniDugme:hover, .ukloniDugmeJezik:hover {
+    color: darkorange !important;
+    cursor: pointer;
+}
+
+.plus-licenca:hover, .plus-jezik:hover {
+    cursor: pointer;
+}
+
+.plus-licenca, .plus-jezik {
+    color: lightgreen;
+    margin-left: 7px;
+}
+
+#ispis-jezika-box div {
+    margin: 7px 0 0 0 !important;
+}
+
+.bootstrap-daytimepicker-widget {
+    width: 500px !important;
+}
+
+/*create pilot*/
+.ocenaZS-label {
+    bottom: -11px;
+}
+
+/*vremenska prognoza*/
+.vremenska-ispis {
+    min-height: 105px;
+    opacity: 0;
+}
+
+.prognoza-p {
+    font-weight: bold;
+}
+
+/*zaposleni polygon roli*/
+#zaposleni-table-holder {
+    opacity: 0;
+    transition: all .2s ease-in;
+}
+
+.servis {
+    top: 126px;
+    left: 239px;
+}
+
+.servis-modeli {
+    border-right: 1px solid ivory;
+}

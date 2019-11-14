@@ -1,0 +1,157 @@
+﻿@model Aviato.ViewModels.EditZaposleniViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3>Detalji zaposlenog</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal dl-zaposleni-detalji">
+        <div>
+            <dt>
+                Pozicija 
+            </dt>
+            <dd>
+                @ViewBag.pozicija
+            </dd>
+        </div>
+
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Zaposleni.JMBG) 
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Zaposleni.JMBG)
+            </dd>
+        </div>
+
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Zaposleni.Ime) 
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Zaposleni.Ime)
+            </dd>
+        </div>
+
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Zaposleni.Prezime) 
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Zaposleni.Prezime)
+            </dd>
+        </div>
+
+        <div>
+            <dt>
+                Email 
+            </dt>
+            <dd>
+                @ViewBag.email
+            </dd>
+        </div>
+
+        <div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Zaposleni.GodinaRodjenja)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Zaposleni.GodinaRodjenja)
+            </dd>
+        </div>
+
+
+        @if (ViewBag.Pozicija == "Pilot")
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Pilot.PoslednjiMedicinski) 
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Pilot.PoslednjiMedicinski)
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayNameFor(model => model.Pilot.OcenaZS)
+            </dt>
+            if (Model.Pilot.OcenaZS)
+            {
+                <dd>
+                    sposoban
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    prizemljen
+                </dd>
+            }
+            <br />
+            <dt>
+                @Html.DisplayNameFor(model => model.Pilot.SatiLetenja)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Pilot.SatiLetenja)
+            </dd>
+        }
+
+        @{
+            var rednibroj = 0;
+        }
+
+        @if (ViewBag.Pozicija == "Mehaničar")
+        {
+            <hr />
+            <h4 class="mt-4">Licence:</h4>
+
+            foreach (var meh in Model.Mehanicar)
+            {
+                rednibroj++;
+
+                <dt>
+                    Licenca @rednibroj:
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => meh.Tip.NazivTipa) &nbsp;
+                </dd>
+
+                <dt>
+                    Datum dobijanja:
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => meh.DatumLicence)
+                </dd>
+                <hr class="mb-4"/>
+            }
+        }
+
+        @if (ViewBag.Pozicija == "Stjuard")
+        {
+            <hr />
+            <h4 class="mt-3">Jezici</h4>
+
+            foreach (var stju in Model.Stjuard)
+            {
+                rednibroj++;
+
+                <dt>
+                    Jezik @rednibroj
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => stju.Jezik.Jezici)
+                </dd>
+                <hr />
+                <br />
+
+            }
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Nazad na listu zaposlenih", "Index") |
+    @Html.ActionLink("Izmeni", "Edit", new { id = Model.Zaposleni.ZaposleniId }) |
+    @Html.ActionLink("Obriši", "Delete", new { id = Model.Zaposleni.ZaposleniId })
+</p>

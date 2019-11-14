@@ -1,0 +1,26 @@
+﻿@model Aviato.ViewModels.RoleViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2></h2>
+
+<div>
+    <h3>Detalji</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Naziv role -
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Izmeni", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Nazad na listu rola", "Index")
+</p>

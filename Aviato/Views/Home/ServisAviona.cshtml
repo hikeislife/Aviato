@@ -1,0 +1,57 @@
+﻿@model Aviato.Models.Avion
+
+@{
+    ViewBag.Title = "ServisAviona";
+}
+
+<h2>ServisAviona</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.AvionId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SifraAviona, "Avion - ",htmlAttributes: new { @class = "control-label pr-1" })
+            <span class="label-avion-servis">
+                @Html.DisplayFor(model => model.SifraAviona)
+            </span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GodinaProizvodnje, "Godina proizvodnje - ",htmlAttributes: new { @class = "control-label pr-1" })
+            <span class="label-avion-servis">
+                @Html.DisplayFor(model => model.GodinaProizvodnje)
+            </span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ServisniStatus, "Servisni status - ", htmlAttributes: new { @class = "control-label pr-1" })
+            <div class="checkbox check-servis d-inline-block">
+                <span class="check-servis-span mr-2">@Html.EditorFor(model => model.ServisniStatus)</span>
+            </div>
+            <span style="color: orange;">na servisu</span>
+        </div>
+
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 servis-submit col-md-10">
+                <input type="submit" value="Potvrdi" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Nazad", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

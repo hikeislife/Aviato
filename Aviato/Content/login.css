@@ -1,0 +1,155 @@
+﻿
+/* 01 GENERALS */
+/* 01.01 colors */
+/* 02 LOGIN PAGE */
+/* 02.01 background img */
+/* 02.02 background plavi filter */
+/* 02.03 container i col div-ovi */
+/* 02.04 logo */
+/* 02.05 forma */
+
+/* 01 GENERALS */
+html, body {
+    height: 100vh;
+    color: #2eb0d5 !important;
+    /*margin-top: -16px;*/
+}
+
+/* 01.01 colors */
+.cst-dark-blue-bcg {
+    background: #1B3039 !important;
+}
+
+.cst-light-blue-bcg {
+    background: #2EB0D5 !important;
+}
+
+.cst-dark-blue-clr {
+    color: #1B3039 !important;
+}
+
+.cst-light-blue-clr {
+    color: #2EB0D5 !important;
+}
+
+/* 02 LOG IN PAGE */
+.cst-all-wrapper {
+    position: relative;
+    min-height: 100%;
+    background-image: url("../Images/bcg-1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+    /* 02.01 background img */
+    .cst-all-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+/* 02.02 background plavi filter */
+.cst-all-wrapper-inside {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgb(27, 48, 57);
+    background: rgba(27, 48, 57, 0.6);
+}
+
+/* 02.03 container i col div-ovi */
+.cst-login-container {
+    height: 90vh;
+}
+
+.cst-main-col {
+    max-width: 550px;
+    box-shadow: 0 0 7px #1B3039;
+}
+
+/* 02.04 logo */
+.cst-logo-holder {
+    width: 250px;
+}
+
+@media screen and (max-width: 500px) {
+    .cst-login-subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+/* 02.05 forma */
+.cst-form {
+    width: 75%;
+}
+
+@media screen and (max-width: 500px) {
+    .cst-form {
+        width: 90%;
+    }
+}
+
+.cst-input {
+    background: none;
+    border-style: none !important;
+    border-bottom: 1px solid #2D5A69 !important;
+    /*color: ivory !important;*/
+    font-size: 1.22rem;
+    width: 100% !important;
+}
+
+.cst-input:invalid {
+    box-shadow: none;
+}
+
+.cst-input:hover {
+    box-shadow: 0 0 2px 2px #2D5A69 !important;
+}
+
+.cst-input:focus {
+    box-shadow: 0 0 2px 2px #2D5A69 !important;
+    background: #283D46 !important;
+}
+
+.cst-input-icon {
+    position: relative;
+    top: 4px;
+    margin-right: 3px;
+}
+
+.cst-login-dummy {
+    height: 1px;
+}
+
+.cst-form-group {
+    position: relative;
+}
+
+.cst-label {
+    position: absolute !important;
+    color: #7195A4;
+    left: 5px;
+    top: 5px;
+    transition: 0.4s ease all !important;
+    -moz-transition: 0.4s ease all !important;
+    -webkit-transition: 0.4s ease all !important;
+}
+
+ .cst-label:hover {
+    cursor: text;
+ }
+
+.cst-input:focus ~ .cst-label, .cst-input:valid ~ .cst-label {
+    top: -33px !important;
+    color: #2EB0D5;
+}
+
+.cst-login-btn:hover {
+    background: #16728D;
+    color: ivory;
+}
+

@@ -1,0 +1,51 @@
+﻿@model Aviato.Models.RegisterViewModel
+
+@* Mehaničar create *@
+
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<h4>Unos licenci za mehaničara</h4>
+<hr />
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div>
+    <div class="ovdedodaj">
+        @Html.LabelFor(model => model.Mehanicar.Licenca, "Licenca", htmlAttributes: new { @class = "control-label col-md-2 ml-3" })
+        @Html.LabelFor(model => model.Mehanicar.DatumLicence, htmlAttributes: new { @class = "control-label cl-mehanicar col-md-8 d-inline-block", @style = "margin-left: 100px" })
+        <div class="form-group col-md-12 target">
+           
+            @Html.DropDownListFor(model => model.Mehanicar.Licenca, new SelectList(ViewBag.Licenca, "Value", "Text"), "Izaberite licencu", new { @class = "form-control", @style = "display: inline-block", @onchange = "uzmiTxtLicence(this.options[this.selectedIndex].text)" })
+            @Html.ValidationMessageFor(model => model.Mehanicar.Licenca, "", new { @class = "text-danger", @style = "padding-right: 20px" })
+
+            @Html.EditorFor(model => model.Mehanicar.DatumLicence, new { htmlAttributes = new { @class = "form-control datetimepicker3", @style = "display: inline-block", @onchange = "uzmiDatumLicence(this.value)" } })
+            @Html.ValidationMessageFor(model => model.Mehanicar.DatumLicence, "", new { @class = "text-danger" })
+
+            <input id="LicenceUnos" type="hidden" name="tipoviZaUnos" value="" />
+            <input id="licenceDatumUnos" type="hidden" name="datumiZaUnos" value="" />
+
+            <span class="fas fa-plus-circle plus-licenca"></span>
+            <div id="ispis-licence-box">
+                <span id="licencaPoruka1" style="display: none; color: red;">Vec ste izabrali ovu licencu</span>
+                <span id="licencaPoruka2" style="display: none; color: red;">Molim izaberite licencu i datum</span>
+                @*<span class="fas fa-minus-circle"></span>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+    function insertCalendar() {
+        $('.datetimepicker3').datetimepicker({
+            format: 'M/DD/YYYY'
+        });
+    }
+    insertCalendar()
+</script>
+
+<script src="~/Scripts/mehanicar.js"></script>

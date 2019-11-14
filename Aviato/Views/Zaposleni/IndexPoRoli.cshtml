@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Aviato.ViewModels.ZaposleniViewModel>
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImeIPrezime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.ZapPoRoli, "Lista po roli", new { @class = "form-control zapPoRoliDDown", @style = "display: inline-block", @onchange = "rola(this.selectedOptions[0].innerHTML)" })
+                    <input id="filterPoRoli" type="hidden" name="rolaHidden" value="" />
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImeIPrezime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pozicija)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalji", "Details", new { id = item.ZaposleniId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+<script src="~/Scripts/ZaposleniPoRoli.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>

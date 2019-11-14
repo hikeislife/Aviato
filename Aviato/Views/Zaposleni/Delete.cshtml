@@ -1,0 +1,52 @@
+﻿@model Aviato.Models.Zaposleni
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Obriši zaposlenog</h3>
+
+<h4>Da li ste sigurni??</h4>
+<div><hr />
+     <dl class="dl-horizontal">
+         <dt>
+             @Html.DisplayNameFor(model => model.JMBG)
+         </dt>
+         <dd>
+             @Html.DisplayFor(model => model.JMBG)
+         </dd>
+         <br />
+         <dt>
+             @Html.DisplayNameFor(model => model.Ime)
+         </dt>
+         <dd>
+             @Html.DisplayFor(model => model.Ime)
+         </dd>
+         <br />
+         <dt>
+             @Html.DisplayNameFor(model => model.Prezime)
+         </dt>
+         <dd>
+             @Html.DisplayFor(model => model.Prezime)
+         </dd>
+         <br />
+         <dt>
+             @Html.DisplayNameFor(model => model.GodinaRodjenja)
+         </dt>
+         <dd>
+             @Html.DisplayFor(model => model.GodinaRodjenja)
+         </dd>
+         <br />
+         
+
+     </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Obriši" class="btn btn-default" /> |
+            @Html.ActionLink("Nazad na listu zaposlenih", "Index")
+        </div>
+    }
+</div>

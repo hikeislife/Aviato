@@ -1,0 +1,71 @@
+﻿@model Aviato.Models.Let
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Obriši let</h3>
+
+<h4>Da li ste sigurni??</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Destinacija1.Naziv)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Destinacija1.Naziv)
+        </dd>
+        <br />
+        <dt>
+            Vreme poletanja -
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VremePoletanja)
+        </dd>
+        <br />
+        <dt>
+            Avion - 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Avion1.SifraAviona)
+        </dd>
+        <br />
+        @*<dt>
+            Pilot -
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zaposleni1.Ime) @Html.DisplayFor(model => model.Zaposleni1.Prezime)
+        </dd>
+        <br />
+        <dt>
+            Kopilot -
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zaposleni.Ime) @Html.DisplayFor(model => model.Zaposleni.Prezime)
+        </dd>
+        <br />
+        <dt>
+            Stjuard1 -
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zaposleni2.Ime) @Html.DisplayFor(model => model.Zaposleni2.Prezime)
+        </dd>
+        <br />
+        <dt>
+            Stjuard2 -
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zaposleni3.Ime) @Html.DisplayFor(model => model.Zaposleni3.Prezime)
+        </dd>*@
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Obriši" class="btn btn-default" /> |
+            @Html.ActionLink("Nazad na listu letova", "Index")
+        </div>
+    }
+</div>
